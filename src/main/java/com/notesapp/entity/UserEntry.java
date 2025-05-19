@@ -33,4 +33,5 @@ public class UserEntry {
 
   @DBRef
   private List <NotesEntry> notesEntries = new ArrayList<>();
+  private List <String> roles;
 }

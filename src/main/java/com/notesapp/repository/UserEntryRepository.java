@@ -9,5 +9,6 @@ public interface UserEntryRepository extends MongoRepository<UserEntry,ObjectId>
 
   UserEntry findByUserName(String username);
 
+  void deleteByUserName(String username);
 
 }
