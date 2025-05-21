@@ -30,6 +30,9 @@ public class UserEntryService{
        userEntry.setRoles(Arrays.asList("USER"));
        userEntryRepository.save(userEntry);
   }
+  public void saveUser(UserEntry userEntry) {
+       userEntryRepository.save(userEntry);
+  }
 
   public List <UserEntry> getAll() {
     return userEntryRepository.findAll();

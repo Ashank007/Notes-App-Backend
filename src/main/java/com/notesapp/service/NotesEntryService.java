@@ -26,7 +26,7 @@ public class NotesEntryService{
     UserEntry user = userEntryService.FindByUserName(userName);   
     NotesEntry saved = notesEntryrepository.save(notesEntry);
     user.getNotesEntries().add(saved);
-    userEntryService.saveEntry(user);
+    userEntryService.saveUser(user);
   }
   public void saveEntry(NotesEntry notesEntry) {
     notesEntryrepository.save(notesEntry);
@@ -40,12 +40,20 @@ public class NotesEntryService{
   }
 
   @Transactional
-  public void DeleteById(ObjectId id,String userName) {
+  public boolean DeleteById(ObjectId id,String userName) {
+    boolean removed = false;
+    try {
      UserEntry user = userEntryService.FindByUserName(userName);
-     System.out.println(user.getNotesEntries());
-     user.getNotesEntries().removeIf(x -> x.getId().equals(id));
-     userEntryService.saveEntry(user);
+     removed = user.getNotesEntries().removeIf(x -> x.getId().equals(id));
+     if(removed){
+     userEntryService.saveUser(user);
      notesEntryrepository.deleteById(id);
+     }
+    } catch (Exception e) {
+      System.out.println(e);
+      throw new RuntimeException("An Error occurred while deleting the notes. ",e);
+    }
+    return removed;
   }
 
 }
