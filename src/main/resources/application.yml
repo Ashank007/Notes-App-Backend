@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://Ash007:7UhEWBXsj5P5QxSw@cluster0.keo96l7.mongodb.net/?retryWrites=true&w=majority 
+      database: notesapp
+      auto-index-creation: true
+
+server:
+  port: 8080
