@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: urihere
+      database: dbname
+      auto-index-creation: true
+
+server:
+  port: 8080
