@@ -8,6 +8,8 @@ import com.notesapp.entity.UserEntry;
 import com.notesapp.repository.UserEntryRepository;
 
 import org.bson.types.ObjectId;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,10 +27,19 @@ public class UserEntryService{
        userEntryRepository.save(userEntry);
   }
 
-  public void saveNewUser(UserEntry userEntry) {
+  private static final Logger logger = LoggerFactory.getLogger(UserEntryService.class);
+
+  public boolean saveNewUser(UserEntry userEntry) {
+    try {
        userEntry.setPassword(passwordEncoder.encode(userEntry.getPassword()));
        userEntry.setRoles(Arrays.asList("USER"));
        userEntryRepository.save(userEntry);
+       return true;
+    } catch (Exception e) {
+      logger.info("Nahi Bana User");
+      return false;
+    }
+
   }
 
   public void saveAdmin(UserEntry userEntry) {

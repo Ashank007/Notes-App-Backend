@@ -39,6 +39,7 @@ public class NotesEntryService{
     return notesEntryrepository.findById(id);
   }
 
+
   @Transactional
   public boolean DeleteById(ObjectId id,String userName) {
     boolean removed = false;
